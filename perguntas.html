@@ -1,0 +1,75 @@
+<h1 class="page-header">Questão</h1>
+
+<div class="row placeholders" ng-controller="PerguntaCtrl">
+    <div class="col-xs-12 col-sm-12 placeholder">
+        <form class="form-horizontal" role="form" ng-submit="submit()">
+            <div class="form-group">
+                <label for="materia" class="col-sm-3 control-label">Matéria</label>
+                <div class="col-sm-9">
+                    <input type="text" ng-model="pergunta.materia" typeahead="m.nome for m in materias | filter:$viewValue | limitTo:10" | class="form-control" placeholder="matéria">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="topico" class="col-sm-3 control-label">Tópicos</label>
+                <div class="col-sm-9">
+                    <tags-input ng-model="pergunta.topicos" placeholder="adicone um, ou mais tópicos">
+                        <auto-complete source="loadTags($query)" min-length="2"></auto-complete>
+                    </tags-input>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="instituicao" class="col-sm-3 control-label">Instituição</label>
+                <div class="col-sm-9">
+                    <input type="text" ng-model="pergunta.instituicao" placeholder="instituição" typeahead="i.nome for i in instituicoes | filter:$viewValue | limitTo:10" | class="form-control">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="ano" class="col-sm-3 control-label">Ano</label>
+                <div class="col-sm-9">
+                    <input type="text" ng-model="pergunta.ano" placeholder="ano" class="form-control">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="Grau" class="col-sm-3 control-label">Grau de Escolaridade</label>
+                <div class="col-sm-9">
+                    <select multiple class="form-control" ng-model="pergunta.grau" ng-options="n.nome for n in graus">
+                        <option value="">Grau de escolaridade</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="pergunta" class="col-sm-3 control-label">Pergunta</label>
+                <div class="col-sm-9">
+                    <div text-angular ng-model="pergunta.enunciado"></div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="alternativas" class="col-sm-3 control-label">Alternativas</label>
+                <div class="col-lg-12">
+                    <div ng-repeat="a in ['a','b','c','d','e']">
+                        <div class="input-group col-md-offset-3">
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default" ng-model="alternativas[$index]" btn-checkbox btn-checkbox-true="1" btn-checkbox-false="0">
+                                    <i class="fa fa-check fa-fw"></i>
+                                </button>
+                            </span>
+                            <input type="text" class="form-control" value="{{a}}" ng-model="pergunta.alternativa">
+                        </div>
+                        <p></p>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="explicacao" class="col-sm-3 control-label">Explicação</label>
+                <div class="col-sm-9">
+                    <textarea placeholder="comente a questão, explicando a solução." class="col-sm-12" ng-model="pergunta.explicacao"></textarea>
+                </div>
+            </div>
+            <div cl ass="form-group">
+                <div class="col-sm-offset-3 col-sm-9">
+                    <button type="submit" class="btn btn-primary">Salvar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,164 @@
+/*
+ * Base structure
+ * #374D3C #355842 #4A6751 #F29F01 #AFAFA8 #DADAD4 #f1f1f1
+
+ */
+
+/* Move down content because we have a fixed navbar that is 50px tall */
+
+body {
+    padding-top: 50px;
+    font-family: 'Ubuntu', sans-serif;
+}
+/*
+ * Global add-ons
+ */
+
+auto-complete {
+    text-align: left
+}
+.btn-default {
+    background: #4A6751;
+    color: #f1f1f1;
+}
+.btn-default[disabled] {
+    color: #4A6751
+}
+.tooltip-inner {
+    background: #F29F01;
+    color: #355842;
+}
+.tooltip-arrow {
+    border-top-color: #F29F01 !important;
+}
+tags-input .tags {
+    border-radius: 4px;
+    box-shadow: none;
+    border-color: #cccccc;
+    color: #555555;
+}
+.table-hover tr:hover {
+    background-color: #DFE7DE
+}
+a {
+    color: #ffffff
+}
+
+.nav-tabs > li > a{
+    color: #374D3C;
+}
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
+    color: #DADAD4;
+    background: #4A6751;
+}
+div.avatar {
+    float: left;
+}
+div.avatar img{
+    margin-right: 10px;
+}
+.dropdown-menu > .active > a,
+.dropdown-menu > .active > a:hover,
+.dropdown-menu > .active > a:focus {
+    background: #4A6751
+}
+.sub-header {
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+}
+/*
+ * Top navigation
+ * Hide default border to remove 1px line.
+ */
+
+.navbar-fixed-top {
+    border: 0;
+    background: #374D3C
+}
+/*
+ * Sidebar
+ */
+
+/* Hide for mobile, show later */
+
+.sidebar {
+    display: none;
+}
+@media (min-width: 768px) {
+    .sidebar {
+        position: fixed;
+        top: 51px;
+        bottom: 0;
+        left: 0;
+        z-index: 1000;
+        display: block;
+        padding: 20px;
+        overflow-x: hidden;
+        overflow-y: auto;
+        /* Scrollable contents if viewport is shorter than content. */
+        background-color: #355842;
+        border-right: 1px solid #eee;
+    }
+}
+/* Sidebar navigation */
+
+.nav-sidebar {
+    margin-right: -21px;
+    /* 20px padding + 1px border */
+    margin-bottom: 20px;
+    margin-left: -20px;
+}
+.sidebar a i {
+    margin-right: 5px;
+    margin-left: 10px;
+}
+.sidebar a {
+    color: #ffffff
+}
+.nav-sidebar > li > a:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+.nav-sidebar > li > a {
+    padding-right: 20px;
+    padding-left: 0px;
+}
+.nav-sidebar > .active > a,
+.nav-sidebar > .active > a:hover,
+.nav-sidebar > .active > a:focus {
+    color: #fff;
+    background-color: #F29F01;
+}
+/*
+ * Main content
+ */
+
+.main {
+    padding: 20px;
+}
+@media (min-width: 768px) {
+    .main {
+        padding-right: 40px;
+        padding-left: 40px;
+    }
+}
+.main .page-header {
+    margin-top: 0;
+}
+/*
+ * Placeholder dashboard ideas
+ */
+
+.placeholders {
+    margin-bottom: 30px;
+    text-align: center;
+}
+.placeholders h4 {
+    margin-bottom: 0;
+}
+.placeholder {
+    margin-bottom: 20px;
+}
+.placeholder img {
+    display: inline-block;
+    border-radius: 50%;
+}

@@ -1,0 +1,16 @@
+{
+    "name": "kmSim",
+    "version": "0.0.0",
+    "description": "",
+    "dependencies": {
+        "bootstrap": "~3",
+        "Font-Awesome": "*",
+        "textAngular": "*",
+        "angular-ui-utils": "*",
+        "angular-bootstrap":"*",
+        "ng-tags-input":"2.0.1",
+        "jsSHA": "*",
+        "blueimp-md5": "*",
+        "kmBag":"git@github.com:caimi/kmBag.git"
+    }
+}

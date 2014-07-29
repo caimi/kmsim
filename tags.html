@@ -1,0 +1,9 @@
+<h1 class="page-header">Tags</h1>
+
+<div class="row" ng-controller="TagsCtrl">
+    <tabset>
+        <tab ng-repeat="tab in tabs" heading="{{tab.title}}" active="tab.active" disabled="tab.disabled">
+            <ng-include src="tab.content" />
+        </tab>
+    </tabset>
+</div>

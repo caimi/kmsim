@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link type="text/css" rel="stylesheet" href="bower_components/Font-Awesome/css/font-awesome.css">
+    <link type="text/css" rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+    <link type="text/css" rel="stylesheet" href="bower_components/ng-tags-input/ng-tags-input.min.css">
+    <link type="text/css" rel="stylesheet" href="assets/css/main.css">
+    <link href='http://fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet' type='text/css'>
+
+    <title>Simulados</title>
+    <style type="text/css">
+    </style>
+    <script>
+    </script>
+</head>
+
+<body ng-app="kmSim">
+    <div class="navbar navbar-fixed-top" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#home">Simulados</a>
+            </div>
+                <form class="navbar-form navbar-right" style="margin-left: 10px">
+                    <input type="text" class="form-control" placeholder="Search...">
+                </form>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#">Simulado</a>
+                    </li>
+                    <li><a href="#">Mensagens</a>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Usuário <span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="#"><i class="fa fa-pencil fa-fw"></i> Registrar-se</a>
+                            </li>
+                            <li><a href="#"><i class="fa fa-sign-in fa-fw"></i> Login</a>
+                            </li>
+                            <li><a href="#"><i class="fa fa-user fa-fw"></i> Perfil</a>
+                            </li>
+                            <li><a href="#"><i class="fa fa-signal fa-fw"></i> Score</a>
+                            </li>
+                            <li class="divider"></li>
+                            <li><a href="#"><i class="fa fa-power-off fa-fw"></i> Logout</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-2 col-md-2 sidebar">
+                 
+                <div style="background: #ffcc33; margin: -20px -20px 10px -20px; padding: 10px; height: 70px">
+                    <div class="avatar" ng-controller="GravatarCtrl">
+                        <img ng-src="{{image}}" height="50" width="50" style="border-radius: 3px; border: 1px solid #666">
+                    </div>
+                    <div>bem vindo caimi</div>
+                </div>
+                <ul class="nav nav-sidebar">
+                    <li><a href="#simulado"><i class="fa fa-fw fa-desktop"></i>Simulado</a>
+                    </li>
+                    <li><a href="#score"><i class="fa fa-fw fa-bar-chart-o"></i>Score</a>
+                    </li>
+                </ul>
+                <ul class="nav nav-sidebar">
+                    <li><a href="#perguntas"><i class="fa fa-fw fa-desktop"></i>Perguntas</a>
+                    </li>
+                    <li><a href="#comentarios"><i class="fa fa-fw fa-comments"></i>Comentários</a>
+                    </li>
+                    <li><a href="#mensagens"><i class="fa fa-fw fa-envelope"></i>Mensagens</a>
+                    </li>
+                    <li><a href="#recursos"><i class="fa fa-fw fa-file-image-o"></i>Recursos</a>
+                    </li>
+                </ul>
+                <ul class="nav nav-sidebar">
+                    <li><a href="#admin"><i class="fa fa-fw fa-gears"></i>Administração</a>
+                    </li>
+                    <li><a href="#tags"><i class="fa fa-fw fa-tags"></i>Tags</a>
+                    </li>
+                    <li><a href="#ajuda"><i class="fa fa-fw fa-life-saver"></i>Ajuda</a>
+                    </li>
+                </ul>
+                
+            </div>
+            <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" ng-view>
+
+            </div>
+        </div>
+
+        <div>
+            <footer style="height: 1400px; clear: both"></footer>
+        </div>
+
+        <!-- /.container-fluid -->
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.5/angular.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.5/angular-route.min.js"></script>
+        <script type="text/javascript" src="bower_components/jquery/dist/jquery.js"></script>
+        <script type="text/javascript" src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+        <script type="text/javascript" src="bower_components/angular-bootstrap/ui-bootstrap.js"></script>
+        <script type="text/javascript" src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+        <script type="text/javascript" src="bower_components/textAngular/dist/textAngular-sanitize.min.js"></script>
+        <script type="text/javascript" src="bower_components/textAngular/dist/textAngular.min.js"></script>
+        <script type="text/javascript" src="bower_components/ng-tags-input/ng-tags-input.js"></script>
+        <script type="text/javascript" src="bower_components/jsSHA/src/sha.js"></script>
+        <script type="text/javascript" src="bower_components/blueimp-md5/js/md5.min.js"></script>
+        <script type="text/javascript" src="bower_components/kmBag/kmBag.js"></script>
+        <script type="text/javascript" src="assets/js/main.js"></script>
+</body>
+
+</html>

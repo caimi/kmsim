@@ -1,0 +1,45 @@
+id,nome,tipo
+1,Português,materia
+2,Informática,materia
+3,"Raciocínio Lógico",materia
+4,"Direito Administrativo",materia
+5,"Direito Constitucional",materia
+6,Gramática,topico
+7,Ortografia,topico
+8,Semântica,topico
+9,kmSim,instituicao
+10,ACAFE,instituicao
+11,Ager,instituicao
+12,CAIPIMES,instituicao
+13,Cesgranrio,instituicao
+14,CESPE,instituicao
+15,CETRO,instituicao
+16,COMPERVE,instituicao
+17,CONESUL,instituicao
+18,Consulplan,instituicao
+19,Convest,instituicao
+20,COPS,instituicao
+21,ESAF,instituicao
+22,ESG,instituicao
+23,FCC,instituicao
+24,FDRH,instituicao
+25,FEC,instituicao
+26,Fepesve,instituicao
+27,FGV,instituicao
+28,FJPF,instituicao
+29,FUMARC,instituicao
+30,"Fundação José Pelúcio Ferreira",instituicao
+31,FUNDEC,instituicao
+32,Funrio,instituicao
+33,IMES,instituicao
+34,"Instituto Ludus",instituicao
+35,IPAD,instituicao
+36,MOVENS,instituicao
+37,NCE,instituicao
+38,Nupps,instituicao
+39,UFPA,instituicao
+40,UFPR,instituicao
+41,Unama,instituicao
+42,UNIFAP,instituicao
+43,Upenet,instituicao
+44,Vunesp,instituicao

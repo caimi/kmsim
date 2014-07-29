@@ -45,27 +45,22 @@
             </div>
             <div class="form-group">
                 <label for="alternativas" class="col-sm-3 control-label">Alternativas</label>
-                <div class="col-lg-12">
-                    <div ng-repeat="a in ['a','b','c','d','e']">
-                        <div class="input-group col-md-offset-3">
-                            <span class="input-group-btn">
-                                <button type="button" class="btn btn-default" ng-model="alternativas[$index]" btn-checkbox btn-checkbox-true="1" btn-checkbox-false="0">
-                                    <i class="fa fa-check fa-fw"></i>
-                                </button>
-                            </span>
-                            <input type="text" class="form-control" value="{{a}}" ng-model="pergunta.alternativa">
-                        </div>
-                        <p></p>
-                    </div>
+                <div class="col-sm-9">
+                    <table class="table">
+                        <tr ng-repeat="a in alternativas">
+                            <td class="text-right radio"><input type="radio" ng-model="a.correta" name="correta" ng-value="$index"></td>
+                            <td class="col-sm-11"><input type="text" class="form-control" value="{{a}}" ng-model="a.descricao"></td>
+                        </tr>    
+                    </table>
                 </div>
             </div>
             <div class="form-group">
                 <label for="explicacao" class="col-sm-3 control-label">Explicação</label>
                 <div class="col-sm-9">
-                    <textarea placeholder="comente a questão, explicando a solução." class="col-sm-12" ng-model="pergunta.explicacao"></textarea>
+                    <textarea placeholder="comente a questão, explicando a solução." class="col-sm-12 form-control" ng-model="pergunta.explicacao"></textarea>
                 </div>
             </div>
-            <div cl ass="form-group">
+            <div class="form-group">
                 <div class="col-sm-offset-3 col-sm-9">
                     <button type="submit" class="btn btn-primary">Salvar</button>
                 </div>

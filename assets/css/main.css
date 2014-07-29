@@ -162,3 +162,6 @@ div.avatar img{
     display: inline-block;
     border-radius: 50%;
 }
+.table td.radio{
+    vertical-align: middle;
+}

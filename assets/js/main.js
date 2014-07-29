@@ -61,7 +61,7 @@ app.controller("SimuladoCtrl", function ($scope, $http) {
 
 app.controller("PerguntaCtrl", function ($scope, $http) {
     $scope.tags = [];
-    $scope.alternativas = [];
+    $scope.alternativas = [{correta: true, descricao: ''},{correta: false, descricao: ''},{correta: false, descricao: ''},{correta: false, descricao: ''},{correta: false, descricao: ''}];
 
     $http.get('/kmsim/rest/tagsByTipo/materia').success(function (data) {
         $scope.materias = data;

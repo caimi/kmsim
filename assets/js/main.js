@@ -61,7 +61,23 @@ app.controller("SimuladoCtrl", function ($scope, $http) {
 
 app.controller("PerguntaCtrl", function ($scope, $http) {
     $scope.tags = [];
-    $scope.alternativas = [{correta: true, descricao: ''},{correta: false, descricao: ''},{correta: false, descricao: ''},{correta: false, descricao: ''},{correta: false, descricao: ''}];
+    $scope.alternativas = [{
+        correta: 0,
+        descricao: ''
+    }, {
+        correta: 1,
+        descricao: ''
+    }, {
+        correta: 2,
+        descricao: ''
+    }, {
+        correta: 3,
+        descricao: ''
+    }, {
+        correta: 4,
+        descricao: ''
+    }];
+    $scope.maxYear = (new Date()).getFullYear();
 
     $http.get('/kmsim/rest/tagsByTipo/materia').success(function (data) {
         $scope.materias = data;
@@ -79,8 +95,34 @@ app.controller("PerguntaCtrl", function ($scope, $http) {
         return $http.get('/kmsim/rest/tagsSearch/' + $q + '/topico');
     };
 
+    $scope.add = function () {
+        $scope.alternativas.push({
+            correta: $scope.alternativas.length,
+            descricao: ''
+        });
+    }
+    
     $scope.submit = function () {
-        console.log("[$0]-[$1]-[$2]-[$3]-[$4]".format($scope.pergunta.materia, $scope.pergunta.topicos, $scope.pergunta.instituicao, $scope.pergunta.grau, $scope.pergunta.enunciado) );
+
+        var enviar = confirm("Os dados seram enviados. Confirma?");
+
+        if (enviar) {
+            var data = {
+                "materia": $scope.pergunta.materia,
+                "tags": $scope.pergunta.tags,
+                "intituicao":$scope.pergunta.,
+                "ano":$scope.pergunta.ano,
+                "grau":$scope.pergunta.grau,
+                "enunciado":$scope.pergunta.enunciado,
+                "correta":$scope.pergunta.correta,
+                "alternativas":$scope.alternativas,
+                "explicacao":$scope.pergunta.explicacao
+            };
+
+            $http.post('/kmsim/rest/pergunta', data).success(function (retorno) {
+                $location.path('perguntas');
+            });
+        }
     }
 });
 

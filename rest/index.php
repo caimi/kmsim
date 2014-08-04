@@ -2,7 +2,8 @@
 require 'Slim/Slim.php';
 require_once 'dbconn.php';
 //require_once 'user.php';
-require_once 'tags.php';
+require_once 'rdTags.php';
+require_once 'rdPerguntas.php';
 
 \Slim\Slim::registerAutoloader();
 
@@ -16,6 +17,9 @@ $app->post('/users', 'addUser');
 $app->put('/users/:id', 'updateUser'); 
 $app->delete('/users/:id', 'deleteUser'); 
 */
+$app->get('/perguntas', 'getPerguntas');
+$app->post('/pergunta','addPergunta');
+
 $app->get('/tag/:id', 'getTag');
 $app->get('/tagsByTipo/:query','tagsByTipo');
 $app->get('/tagsSearch/:query/:tipo','tagsSearch');

@@ -1,0 +1,71 @@
+<h1 class="page-header">Perguntas</h1>
+
+<div class="row placeholders" ng-controller="ListaPerguntasCtrl">
+    <div class="col-xs-12 col-sm-12 placeholder">
+        <table class="table table-striped table-hover">
+
+        </table>
+        <table class="table table-striped table-hover">
+            <tr>
+                <th class="col-sm-1"><i class="fa fa-filter" ng-click="showFilters = !showFilters"></i>
+                </th>
+                <th class="col-sm-2">Materia</th>
+                <th class="col-sm-1">Instituição</th>
+                <th class="col-sm-1">Ano</th>
+                <th class="col-sm-2">Grau</th>
+                <th class="col-sm-5">Enunciado</th>
+                <th></th>
+            </tr>
+            <tr ng-show="showFilters">
+                <td colspan="6">
+                    <div class="row">
+                        <div class="col-sm-2 text-right">Matéria</div>
+                        <div class="col-sm-4">
+                            <input type="text" ng-model="search.materia" class="form-control input-sm" typeahead="i.nome for i in materias | filter:$viewValue | limitTo:10" placeholder="matéria">
+                        </div>
+                        <div class="col-sm-2 text-right">Instituição</div>
+                        <div class="col-sm-4">
+                            <input type="text" ng-model="search.instituicao" class="form-control input-sm" typeahead="i.nome for i in instituicoes | filter:$viewValue | limitTo:10" placeholder="instituição">
+                        </div>
+                    </div>
+                    <p></p>
+                    <div class="row">
+                        <div class="col-sm-2 text-right">Ano</div>
+                        <div class="col-sm-4">
+                            <input type="text" ng-model="search.ano" class="form-control input-sm">
+                        </div>
+                        <div class="col-sm-2 text-right">Escolaridade</div>
+                        <div class="col-sm-4">
+                            <input type="text" ng-model="search.grau" class="form-control input-sm" typeahead="i.nome for i in graus | filter:$viewValue | limitTo:10">
+                        </div>
+                    </div>
+                    <p></p>
+                    <div class="row">
+                        <div class="col-sm-2 text-right">Enunciado</div>
+                        <div class="col-sm-4">
+                            <input type="text" ng-model="search.enunciado" class="form-control input-sm">
+                        </div>
+                        <div class="col-sm-2 text-right">Qualquer campo</div>
+                        <div class="col-sm-4">
+                            <input type="text" ng-model="search" class="form-control input-sm">
+                        </div>
+                    </div>
+                </td>
+            </tr>
+
+            <tr ng-repeat="p in perguntas | filter: search" ng-click="open(p.id)">
+                <td class="text-left">{{$index+1}}</td>
+                <td class="text-left">{{p.materia}}</td>
+                <td class="text-left">{{p.instituicao}}</td>
+                <td class="text-left">{{p.ano}}</td>
+                <td class="text-left">{{p.grau}}</td>
+                <td class="text-left">
+                    <div ng-bind-html="p.enunciado"></div>
+                </td>
+                <td class="text-right">
+                    <button class="btn btn-default btn-xs" ng-click="deleteTag(i)" tooltip="remove a instituição">X</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>

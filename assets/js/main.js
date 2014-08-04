@@ -10,19 +10,19 @@ app.config(['$routeProvider',
             controller: 'RouteController'
         }).
         when('/perguntas/', {
-            templateUrl: 'perguntas.html',
+            templateUrl: 'pages/perguntas.html',
             controller: 'RouteController'
         }).
         when('/instituicao/', {
-            templateUrl: 'instituicao.html',
+            templateUrl: 'pages/instituicao.html',
             controller: 'RouteController'
         }).
         when('/materia/', {
-            templateUrl: 'materia.html',
+            templateUrl: 'pages/materia.html',
             controller: 'RouteController'
         }).
         when('/topico/', {
-            templateUrl: 'topico.html',
+            templateUrl: 'pages/topico.html',
             controller: 'RouteController'
         }).
         when('/recursos/', {
@@ -30,7 +30,11 @@ app.config(['$routeProvider',
             controller: 'RouteController'
         }).
         when('/tags/', {
-            templateUrl: 'tags.html',
+            templateUrl: 'pages/tags.html',
+            controller: 'RouteController'
+        }).
+        when('/pergunta/', {
+            templateUrl: 'pages/pergunta.html',
             controller: 'RouteController'
         }).
         when('/', {
@@ -56,7 +60,6 @@ app.controller("SimuladoCtrl", function ($scope, $http) {
         $scope.port = data;
         console.log("deveria trazer dados");
     });
-
 });
 
 app.controller("PerguntaCtrl", function ($scope, $http) {
@@ -79,18 +82,8 @@ app.controller("PerguntaCtrl", function ($scope, $http) {
     }];
     $scope.maxYear = (new Date()).getFullYear();
 
-    $http.get('/kmsim/rest/tagsByTipo/materia').success(function (data) {
-        $scope.materias = data;
-    });
-    $http.get('/kmsim/rest/tagsByTipo/topico').success(function (data) {
-        $scope.topicos = data;
-    });
-    $http.get('/kmsim/rest/tagsByTipo/instituicao').success(function (data) {
-        $scope.instituicoes = data;
-    });
-    $http.get('/kmsim/rest/tagsByTipo/grau').success(function (data) {
-        $scope.graus = data;
-    });
+    filtros($http, $scope);
+    
     $scope.loadTags = function ($q) {
         return $http.get('/kmsim/rest/tagsSearch/' + $q + '/topico');
     };
@@ -110,7 +103,7 @@ app.controller("PerguntaCtrl", function ($scope, $http) {
             var data = {
                 "materia": $scope.pergunta.materia,
                 "tags": $scope.pergunta.tags,
-                "intituicao":$scope.pergunta.,
+                "intituicao":$scope.pergunta.instituicao,
                 "ano":$scope.pergunta.ano,
                 "grau":$scope.pergunta.grau,
                 "enunciado":$scope.pergunta.enunciado,
@@ -118,12 +111,27 @@ app.controller("PerguntaCtrl", function ($scope, $http) {
                 "alternativas":$scope.alternativas,
                 "explicacao":$scope.pergunta.explicacao
             };
-
+            console.log(data);
             $http.post('/kmsim/rest/pergunta', data).success(function (retorno) {
                 $location.path('perguntas');
             });
         }
     }
+});
+
+app.controller("ListaPerguntasCtrl", function ($scope, $http, $location) {
+    $location.search("materia","Português");
+    //alert($location.url());
+    
+    filtros($http, $scope);
+    
+    $scope.open = function($id){
+        alert("abrir pergunta id $0".format($id));
+    };
+    
+    $http.get('/kmsim/rest/perguntas').success(function (data) {
+        $scope.perguntas = data;
+    });
 });
 
 app.controller("FileCtrl", function ($scope, $http) {
@@ -143,19 +151,19 @@ app.controller("TagsCtrl", function ($scope, $http, $location) {
     var actived = $location.search().active;
     $scope.tabs = [{
         title: 'Matérias',
-        content: 'materia.html',
+        content: 'pages/materia.html',
         active: actived == 'materia'
     }, {
         title: 'Tópicos',
-        content: 'topico.html',
+        content: 'pages/topico.html',
         active: actived == 'topico'
     }, {
         title: 'Instituições',
-        content: 'instituicao.html',
+        content: 'pages/instituicao.html',
         active: actived == 'instituicao'
     }, {
         title: 'Grau de Escolaridade',
-        content: 'grau.html',
+        content: 'pages/grau.html',
         active: actived == 'grau'
     }];
 
@@ -204,3 +212,18 @@ app.controller("TagsCtrl", function ($scope, $http, $location) {
         }
     }
 });
+
+function filtros($http, $scope){
+    $http.get('/kmsim/rest/tagsByTipo/materia').success(function (data) {
+        $scope.materias = data;
+    });
+    $http.get('/kmsim/rest/tagsByTipo/topico').success(function (data) {
+        $scope.topicos = data;
+    });
+    $http.get('/kmsim/rest/tagsByTipo/instituicao').success(function (data) {
+        $scope.instituicoes = data;
+    });
+    $http.get('/kmsim/rest/tagsByTipo/grau').success(function (data) {
+        $scope.graus = data;
+    });
+}

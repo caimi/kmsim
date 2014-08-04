@@ -1,7 +1,7 @@
 <?php 
 
-function getPergunta($id) {
-    $sql = "SELECT t.id, t.nome, t.tipo FROM perguntas t WHERE id=:id";
+function getTag($id) {
+    $sql = "SELECT t.id, t.nome, t.tipo FROM tags t WHERE id=:id";
     try {
         $dbCon = getDbConn();
         $stmt = $dbCon->prepare($sql);  
@@ -31,6 +31,7 @@ function tagsByTipo($query) {
         echo '{"error":{"text":'. $e->getMessage() .'}}'; 
     }
 }
+
 function tagsSearch($query, $tipo) {
     $sql = "SELECT nome as text FROM tags WHERE nome LIKE :query and tipo = :tipo order by nome";
     try {
@@ -84,3 +85,5 @@ function deleteTag($id) {
         echo '{"error":{"text":'. $e->getMessage() .'}}'; 
     }
 }
+
+?>

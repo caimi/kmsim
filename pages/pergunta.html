@@ -1,8 +1,7 @@
-<h1 class="page-header">Questão</h1>
+<h1 class="page-header">Nova Pergunta</h1>
 
 <div class="row placeholders" ng-controller="PerguntaCtrl">
-    <button ng-model="novo"/>
-    <div class="col-xs-12 col-sm-12 placeholder" ng-show="novo">
+    <div class="col-xs-12 col-sm-12 placeholder">
         <form class="form-horizontal" role="form" ng-submit="submit()">
             <div class="form-group">
                 <label for="materia" class="col-sm-3 control-label">Matéria</label>
@@ -33,7 +32,7 @@
             <div class="form-group">
                 <label for="Grau" class="col-sm-3 control-label">Grau de Escolaridade</label>
                 <div class="col-sm-9">
-                    <select multiple class="form-control" ng-model="pergunta.grau" ng-options="n.nome for n in graus" required>
+                    <select class="form-control" ng-model="pergunta.grau" ng-options="n.nome for n in graus" required>
                         <option value="">Grau de escolaridade</option>
                     </select>
                 </div>
@@ -45,12 +44,12 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="alternativas" class="col-sm-3 control-label" ng-click="add()">Alternativas</label>
+                <label for="alternativas" class="col-sm-3 control-label">Alternativas<br><span class="btn btn-default btn-xs" ng-click="add()">+1</span></label>
                 <div class="col-sm-9">
                     <table class="table">
                         <tr ng-repeat="a in alternativas">
                             <td class="text-right radio"><input type="radio" ng-model="pergunta.correta" ng-value = "a.correta" name="correta"></td>
-                            <td class="col-sm-11"><input type="text" class="form-control" value="" ng-model="a.descricao"></td>
+                            <td class="col-sm-11"><input type="text" class="form-control" value="" ng-model="a.descricao" required></td>
                         </tr>    
                     </table>
                 </div>

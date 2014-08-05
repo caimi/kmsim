@@ -48,7 +48,7 @@
                 <div class="col-sm-9">
                     <table class="table">
                         <tr ng-repeat="a in alternativas">
-                            <td class="text-right radio"><input type="radio" ng-model="pergunta.correta" ng-value = "a.correta" name="correta"></td>
+                            <td class="text-right radio"><input type="radio" ng-model="pergunta.correta" ng-value = "a.correta" name="correta" required></td>
                             <td class="col-sm-11"><input type="text" class="form-control" value="" ng-model="a.descricao" required></td>
                         </tr>    
                     </table>

@@ -135,6 +135,13 @@ input.ng-invalid {
 input.ng-valid {
   border: 1px solid green;
 }
+.alternativa{
+    width: 15px;
+    display: inline-block;
+}
+.resposta{
+      width: 25px;
+}
 /*
  * Main content
  */

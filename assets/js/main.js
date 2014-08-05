@@ -5,8 +5,8 @@ var app = angular.module("kmSim", ['ngRoute', 'ui.bootstrap', 'textAngular', 'ng
 app.config(['$routeProvider',
     function ($routeProvider) {
         $routeProvider.
-        when('/simulado', {
-            templateUrl: 'simulados.html',
+        when('/simulado-novo', {
+            templateUrl: 'simulado-novo.html',
             controller: 'RouteController'
         }).
         when('/perguntas/', {
@@ -37,6 +37,10 @@ app.config(['$routeProvider',
             templateUrl: 'pages/pergunta.html',
             controller: 'RouteController'
         }).
+        when('/simulado/', {
+            templateUrl: 'simulado.html',
+            controller: 'RouteController'
+        }).
         when('/', {
             templateUrl: 'home.html',
             controller: 'RouteController'
@@ -55,14 +59,16 @@ app.controller("GravatarCtrl", function ($scope) {
     $scope.image = "http://www.gravatar.com/avatar/$0.png".format(kmApi.hash.md5('carlos.caimi@gmail.com'));
 });
 
-app.controller("SimuladoCtrl", function ($scope, $http) {
-    $http.jsonp('http://localhost/rest/portfolios').success(function (data) {
-        $scope.port = data;
-        console.log("deveria trazer dados");
-    });
+app.controller("SimuladoCtrl", function ($scope, $http, $location) {
+    filtros($http, $scope);
+    $scope.item = 'inicio';
+    
+    $scope.iniciar = function () {
+        $location.path("simulado");
+    }
 });
 
-app.controller("PerguntaCtrl", function ($scope, $http) {
+app.controller("PerguntaCtrl", function ($scope, $http, $location) {
     $scope.tags = [];
     $scope.alternativas = [{
         correta: 0,
@@ -83,7 +89,7 @@ app.controller("PerguntaCtrl", function ($scope, $http) {
     $scope.maxYear = (new Date()).getFullYear();
 
     filtros($http, $scope);
-    
+
     $scope.loadTags = function ($q) {
         return $http.get('/kmsim/rest/tagsSearch/' + $q + '/topico');
     };
@@ -94,22 +100,22 @@ app.controller("PerguntaCtrl", function ($scope, $http) {
             descricao: ''
         });
     }
-    
-    $scope.submit = function () {
 
+    $scope.submit = function () {
         var enviar = confirm("Os dados seram enviados. Confirma?");
 
         if (enviar) {
+
             var data = {
                 "materia": $scope.pergunta.materia,
                 "tags": $scope.pergunta.tags,
-                "intituicao":$scope.pergunta.instituicao,
-                "ano":$scope.pergunta.ano,
-                "grau":$scope.pergunta.grau,
-                "enunciado":$scope.pergunta.enunciado,
-                "correta":$scope.pergunta.correta,
-                "alternativas":$scope.alternativas,
-                "explicacao":$scope.pergunta.explicacao
+                "instituicao": $scope.pergunta.instituicao,
+                "ano": $scope.pergunta.ano,
+                "grau": $scope.pergunta.grau,
+                "enunciado": $scope.pergunta.enunciado,
+                "correta": $scope.pergunta.correta,
+                "alternativas": $scope.alternativas,
+                "explicacao": $scope.pergunta.explicacao
             };
             console.log(data);
             $http.post('/kmsim/rest/pergunta', data).success(function (retorno) {
@@ -120,15 +126,15 @@ app.controller("PerguntaCtrl", function ($scope, $http) {
 });
 
 app.controller("ListaPerguntasCtrl", function ($scope, $http, $location) {
-    $location.search("materia","Português");
+    // $location.search("materia","Português");
     //alert($location.url());
-    
+
     filtros($http, $scope);
-    
-    $scope.open = function($id){
+
+    $scope.open = function ($id) {
         alert("abrir pergunta id $0".format($id));
     };
-    
+
     $http.get('/kmsim/rest/perguntas').success(function (data) {
         $scope.perguntas = data;
     });
@@ -213,7 +219,7 @@ app.controller("TagsCtrl", function ($scope, $http, $location) {
     }
 });
 
-function filtros($http, $scope){
+function filtros($http, $scope) {
     $http.get('/kmsim/rest/tagsByTipo/materia').success(function (data) {
         $scope.materias = data;
     });

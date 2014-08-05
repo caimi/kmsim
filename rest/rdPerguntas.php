@@ -38,44 +38,47 @@ function addPergunta(){
     $postdata = file_get_contents("php://input");
     $request = json_decode($postdata);
     
-    $pIdMateria = $request->materia;
-    $pIdInstituicao = $request->instituicao;
-    $pIdGrau = $request->grau;
+    $pMateria = $request->materia;
+    $pInstituicao = $request->instituicao;
+    $pGrau = $request->grau;
     $pAno = $request->ano;
     $pEnunciado = $request->enunciado;
     $pExplicacao = $request->explicacao;
     $alternativas = $request->alternativas;
     $correta = $request->correta;
-    
-    $sql = "INSERT INTO kmsim.perguntas (`id_materia`,`id_instituicao`, `id_grau`, `ano`, `enunciado`, `explicacao`) VALUES ((select id from kmsim.tags where nome = :materia and tipo='materia'), select id from kmsim.tags where nome = :instituicao and tipo='instituicao'), (select id from kmsim.tags where nome = :grau and tipo='Grau'), :ano, :enunciado, :explicacao)";
-    $sqlAlteranativas = "insert into alternativas (`id_pergunta`, `alternativa`, `correta`) VALUES (:pergunta, :alternativa, :correta)";
+
+    $sql = "INSERT INTO kmsim.perguntas (`id_materia`,`id_instituicao`, `id_grau`, `ano`, `enunciado`, `explicacao`) VALUES ((select id from kmsim.tags where nome=:materia and tipo='materia'), (select id from kmsim.tags where nome=:instituicao and tipo='instituicao'), (select id from kmsim.tags where nome=:grau and tipo='Grau'), :ano, :enunciado, :explicacao)";
+    $sqlAlteranativas = "INSERT INTO alternativas (`id_pergunta`, `alternativa`, `correta`) VALUES (:pergunta, :alternativa, :correta)";
 
     try {
         $dbCon = getDbConn();
         $dbCon->beginTransaction();
         
         $stmt = $dbCon->prepare($sql);  
-        $stmt->bindParam("materia", $pNome);
+        $stmt->bindParam("materia", $pMateria);
         $stmt->bindParam("instituicao", $pInstituicao);
-        $stmt->bindParam("grau", $pGrau);
+        $stmt->bindParam("grau", $pGrau->nome);
         $stmt->bindParam("ano", $pAno);
         $stmt->bindParam("enunciado", $pEnunciado);
         $stmt->bindParam("explicacao", $pExplicacao);
-        //$stmt->execute();
+        $stmt->execute();
         $lastId = $dbCon->lastInsertId();
-        echo $stmt->debugDumpParams();
+        //echo $stmt->debugDumpParams();
         
-        $max = sizeof($huge_array);
         for($i = 0; $i < sizeof($alternativas);$i++){
             $stmt = $dbCon->prepare($sqlAlteranativas);  
             $stmt->bindParam("pergunta", $lastId);
-            $stmt->bindParam("alternativa", $alternativas[$i]);
-            $stmt->bindParam("correta", $i == $correta);
-            //$stmt->execute();
-            echo $stmt->debugDumpParams();
+            $stmt->bindParam("alternativa", $alternativas[$i]->descricao);
+            $respostaCorreta = $i == $correta?1:0;
+            $stmt->bindParam("correta", $respostaCorreta);
+            $stmt->execute();
+            //echo $stmt->debugDumpParams();
         }
+        $dbCon->commit();
         $dbCon = null;
+        
     } catch(PDOException $e) {
+        $dbCon->rollBack();
         echo $postdata.'{"error":{"text":'. $e->getMessage() .'}}'; 
     }
 }
